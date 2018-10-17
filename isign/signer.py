@@ -100,7 +100,7 @@ class Signer(object):
         team_id = self._get_team_id()
         if team_id is None:
             raise ImproperCredentials("Cert file does not contain Subject line"
-                                      "with Apple Organizational Unit (OU)")
+                                      " with Apple Organizational Unit (OU)")
         self.team_id = team_id
         self.check_openssl_version()
 
@@ -155,7 +155,7 @@ class Signer(object):
             '-noout'
         ]
         certificate_info = openssl_command(cmd)
-        subject_with_ou_match = re.compile(r'\s+Subject:.*OU=(\w+)')
+        subject_with_ou_match = re.compile(r'\s+Subject:.*OU\s*=\s*(\w+)')
         for line in certificate_info.splitlines():
             match = subject_with_ou_match.match(line)
             if match is not None:
